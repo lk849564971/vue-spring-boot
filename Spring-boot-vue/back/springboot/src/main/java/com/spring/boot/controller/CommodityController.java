@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-@RestController
+@RestController//直接返回JSON数据
 @RequestMapping("/api")
 public class CommodityController {
 

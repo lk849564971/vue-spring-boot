@@ -15,6 +15,6 @@ public interface CommodityDAO extends JpaRepository<Commodity, Integer> {
     //通过cno查找商品
     public List<Commodity> findByCno(int cno );
 
-    ////通过buyerno查找商品，我的订单
+    //通过buyerno查找商品，我的订单
     public List<Commodity> findByBuyerno(int sellerno);
 }

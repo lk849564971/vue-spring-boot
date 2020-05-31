@@ -4,12 +4,11 @@ import com.spring.boot.dao.CommodityDAO;
 import com.spring.boot.bean.Commodity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Transactional
 public class CommodityService {
 
     @Autowired
@@ -17,7 +16,15 @@ public class CommodityService {
 
     //查找所有商品
     public List<Commodity> findAll() {
-        return commodityDAO.findAll();
+        List<Commodity> commodityList = commodityDAO.findAll();
+        List<Commodity> rList = new ArrayList<Commodity>();
+        int num = commodityList.size();
+        for(int i = 0;i<num;i++) {
+            Commodity commodity = commodityList.get(i);
+            if (commodity.getCstate()==0)
+                rList.add(commodity);
+        }
+        return rList;
     }
 
     //查找我的商品

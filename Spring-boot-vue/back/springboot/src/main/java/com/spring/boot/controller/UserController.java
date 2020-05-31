@@ -1,12 +1,12 @@
 package com.spring.boot.controller;
 
 
-import com.spring.boot.bean.Users;
+import com.spring.boot.bean.User;
 import com.spring.boot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RestController // RestController 直接返回JSON数据
+@RestController //直接返回JSON数据
 @RequestMapping("/api")
 public class UserController {
 
@@ -18,7 +18,7 @@ public class UserController {
     public String login(@RequestParam(value = "uname") String uname,
                         @RequestParam(value = "upwd") String upwd) throws Exception {
         try {
-            Users user = userService.findOne(uname);
+            User user = userService.findOne(uname);
             if (user.getUpwd().compareTo(upwd)==0) {
                 return String.valueOf(user.getUno());
             }
@@ -35,10 +35,10 @@ public class UserController {
     public Boolean register(@RequestParam(value = "uname") String uname,
                             @RequestParam(value = "upwd") String upwd) throws Exception {
         try {
-            Users users = new Users();
-            users.setUname(uname);
-            users.setUpwd(upwd);
-            userService.addUser(users);
+            User user = new User();
+            user.setUname(uname);
+            user.setUpwd(upwd);
+            userService.addUser(user);
             return true;
         } catch (Exception e) {
             return false;

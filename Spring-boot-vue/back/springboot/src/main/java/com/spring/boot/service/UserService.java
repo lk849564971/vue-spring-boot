@@ -13,10 +13,12 @@ public class UserService {
     @Autowired
     UserDAO userDAO;
 
+    //查找一个用户
     public Users findOne(String uname) {
         return userDAO.findByUname(uname).get(0);
     }
 
+    //添加用户
     public void addUser(Users user) {
         userDAO.save(user);
     }

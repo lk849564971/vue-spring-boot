@@ -34,10 +34,12 @@ export default {
     };
   },
   methods: {
+    //返回
     back(){
       this.$router.push("/");
     },
 
+    //重置表单
     resetForm(){
       this.rform.uname = "";
       this.rform.upwd = "";
@@ -45,6 +47,7 @@ export default {
       return false;
     },
 
+    //注册请求
     submitInfo() {
       if (this.rform.uname.trim() === "") {
         this.$alert("用户名不能为空", "提示", {

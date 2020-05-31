@@ -119,6 +119,7 @@ export default {
       uno: this.$route.query.uno,
       uname: this.$route.query.uname,
       indexData:'0',
+      //发送请求获取商品信息
       listForm: this.$axios({
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         method: "post",
@@ -133,6 +134,7 @@ export default {
     };
   },
   methods: {
+    //根据state的值修改显示信息
     getstate(indexstate){
       if (indexstate === 1){
         return "已锁定"
@@ -144,6 +146,8 @@ export default {
         return "无人购买"
       }
     },
+
+    //购买前的检查
     prepareBuy(sellerno,buystate){
       if(buystate == 1 || buystate == 2){
         this.$alert("此商品当前无法购买", "提示", {
@@ -159,6 +163,8 @@ export default {
         this.dialogVisible = true
       }
     },
+
+    //发送购买请求
     onBuy(no,index) {
       this.$axios({
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -190,7 +196,8 @@ export default {
           console.log(Error);
         });
     },
-    
+
+    //文字过多时以...替换
     showfull(text){
       if (text.length > 7){
         return text.substr(0, 5) + '...'
@@ -200,6 +207,7 @@ export default {
       }
     },
 
+    //退出登录
     loginOut() {
       this.uno = "";
       this.uname = "";

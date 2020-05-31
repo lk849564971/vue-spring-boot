@@ -35,6 +35,7 @@ export default {
     };
   },
   methods: {
+    //检查后发送上架商品请求
     onSubmit() {
       if (this.form.cname.trim() === "") {
         this.$alert("商品名字不能为空", "提示", {
@@ -82,6 +83,7 @@ export default {
         });
     },
 
+    //返回
     back() {
       this.form.cname = "";
       this.form.cprice = 0;

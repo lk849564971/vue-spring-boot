@@ -15,6 +15,7 @@
     </el-aside>
 
     <el-main>
+      <!--商品表格-->
       <el-card>
         <el-row gutter="2">
           <el-col :span="3">
@@ -59,6 +60,7 @@
                 <div>{{item.ctime}}</div>
               </el-col>
 
+              <!--查看商品的详细信息-->
               <el-col :span="2" >
                 <div>
                   <el-button type="primary" @click="indexData=index;drawer = true">详情</el-button>
@@ -127,6 +129,7 @@ export default {
       uno: this.$route.query.uno,
       uname: this.$route.query.uname,
       indexData: 0,
+      //发送请求获取商品信息
       orderForm: this.$axios({
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         method: "post",
@@ -142,6 +145,7 @@ export default {
     };
   },
   methods: {
+    //退款
     fund(no,index) {
       this.$axios({
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -169,6 +173,7 @@ export default {
         });
     },
 
+    //收货
     deal(no,index) {
       this.$axios({
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -196,6 +201,7 @@ export default {
         });
     },
 
+    //根据state的值显示信息
     getstate(indexstate){
       if (indexstate === 1){
         return "已付款"
@@ -207,6 +213,8 @@ export default {
         return "已退款"
       }
     },
+
+    //退款前的检查
     preparerefund(fundstate){
       if(fundstate === 2 ){
         this.$alert("此商品已收货，无法退款", "提示", {
@@ -223,6 +231,7 @@ export default {
       }
     },
 
+    //收货前的检查
     prepareredeal(dealstate){
       if(dealstate === 2 ){
         this.$alert("此商品已收货，无法再次收货", "提示", {
@@ -239,6 +248,7 @@ export default {
       }
     },
 
+    //文字过多时以...替换
     showfull(text){
       if (text.length > 7){
         return text.substr(0, 5) + '...'
@@ -248,12 +258,14 @@ export default {
       }
     },
 
+    //退出登录
     loginOut() {
       this.uno = "";
       this.uname = "";
       this.$router.push("/");
     },
 
+    //返回
     back() {
       this.$router.push({
         name: "Home",
@@ -264,7 +276,7 @@ export default {
       });
     },
 
-    //创建
+    //上架商品
     createOrder() {
       this.$router.push({
         name: "CreateOrder",
@@ -275,7 +287,7 @@ export default {
       });
     },
 
-    //查看购买的商品
+    //查看出售的商品
     myCommodity() {
       this.$router.push({
         name: "MyCommodity",

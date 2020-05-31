@@ -6,7 +6,6 @@ import com.spring.boot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-//@Controller
 @RestController // RestController 直接返回JSON数据
 @RequestMapping("/api")
 public class UserController {

@@ -29,9 +29,12 @@ export default {
     };
   },
   methods: {
+    //进入注册界面
     toRegister() {
       this.$router.push("/register");
     },
+
+    //检查信息后发送请求登录
     login() {
       if (this.loginForm.uname.trim() === "") {
         this.$alert("用户名不能为空", "提示", {

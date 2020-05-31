@@ -5,9 +5,9 @@ import javax.persistence.*;
 @Entity//实体类
 @Table(name = "commodity")//表名 commodity
 public class Commodity {
-    @Id
+    @Id//主键
     @GeneratedValue(strategy = GenerationType.IDENTITY)//标注主键，且为自增长型
-    @Column(name = "cno")
+    @Column(name = "cno")//字段名
     private int cno;
 
     @Column(name = "uno")

@@ -7,11 +7,15 @@
         <el-button type="primary" style="font-size:15px; width:190px" @click="back()" round>返回</el-button>
         <br />
         <br />
+        <el-button type="primary" style="font-size:15px; width:190px" @click="createOrder()" round>上架商品</el-button>
+        <br />
+        <br />
         <el-button type="primary" style="font-size:15px; width:190px" @click="myOrder()" round>我的订单</el-button>
       </div>
     </el-aside>
 
     <el-main>
+      <!--我的商品表格-->
       <el-card>
         <el-row gutter="2">
           <el-col :span="3">
@@ -56,6 +60,7 @@
                 <div>{{item.ctime}}</div>
               </el-col>
 
+              <!--查看商品的详细信息-->
               <el-col :span="1.5" >
                 <div>
                   <el-button type="primary" @click="indexData=index;drawer = true">详情</el-button>
@@ -67,10 +72,12 @@
                   >
                     <el-form :model="form">
                       <el-form-item label="序号： " :label-width="formLabelWidth">{{cForm[indexData].cno}}</el-form-item>
-                      <el-form-item label="商品名称: " :label-width="formLabelWidth">{{showfull(cForm[indexData].cname)}}</el-form-item>
+                      <el-form-item label="商品名称: " :label-width="formLabelWidth">{{showfull(cForm[indexData].cname)}}
+                      </el-form-item>
                       <el-form-item label="价格/元: " :label-width="formLabelWidth">{{cForm[indexData].cprice.toFixed(2)}}
                       </el-form-item>
-                      <el-form-item label="描述: " :label-width="formLabelWidth">{{showfull(cForm[indexData].cinformation)}}</el-form-item>
+                      <el-form-item label="描述: " :label-width="formLabelWidth">{{showfull(cForm[indexData].cinformation)}}
+                      </el-form-item>
                       <el-form-item label="售出状态: " :label-width="formLabelWidth">{{getstate(cForm[indexData].cstate)}}
                       </el-form-item>
                       <el-form-item label="发售时间: " :label-width="formLabelWidth">{{cForm[indexData].ctime}}</el-form-item>
@@ -125,6 +132,7 @@ export default {
       uno: this.$route.query.uno,
       uname: this.$route.query.uname,
       indexData: 0,
+      //发送请求获取商品信息
       cForm: this.$axios({
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         method: "post",
@@ -140,6 +148,7 @@ export default {
     };
   },
   methods: {
+    //删除，下架商品
     out(no,index) {
       this.$axios({
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -168,6 +177,7 @@ export default {
         });
     },
 
+    //根据state的值修改显示信息
     getstate(indexstate){
       if (indexstate === 1){
         return "买家已付款"
@@ -176,12 +186,14 @@ export default {
         return "买家已收货"
       }
       else if (indexstate === -1){
-        return "已下架"
+        return "已下架或删除"
       }
       else{
         return "无人购买"
       }
     },
+
+    //删除记录前的检查
     prepareredelete(deletestate){
       if(deletestate === 0 ){
         this.$alert("此商品已发布，无法删除记录，只能下架", "提示", {
@@ -198,6 +210,7 @@ export default {
       }
     },
 
+    //下架前的检查
     preparereout(outstate){
       if(outstate === 2 ){
         this.$alert("此商品已交易完成，无法下架，只能删除记录", "提示", {
@@ -214,6 +227,7 @@ export default {
       }
     },
 
+    //文字过多时以...替换
     showfull(text){
       if (text.length > 7){
         return text.substr(0, 5) + '...'
@@ -223,12 +237,14 @@ export default {
       }
     },
 
+    //退出登录
     loginOut() {
       this.uno = "";
       this.uname = "";
       this.$router.push("/");
     },
 
+    //返回
     back() {
       this.$router.push({
         name: "Home",
@@ -239,6 +255,17 @@ export default {
       });
     },
 
+    //上架商品
+    createOrder() {
+      this.$router.push({
+        name: "CreateOrder",
+        query: {
+          uname: this.uname,
+          uno: this.uno
+        }
+      });
+    },
+    
     //查看购买的商品
     myOrder() {
       this.$router.push({

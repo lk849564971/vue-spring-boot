@@ -6,9 +6,9 @@ import javax.persistence.*;
 @Table(name = "user") //表名 user
 public class Users {
 
-    @Id
+    @Id//主键
     @GeneratedValue(strategy = GenerationType.IDENTITY) //标注主键，且为自增长型
-    @Column(name = "uno")
+    @Column(name = "uno")//字段名
     private int uno;
 
     @Column(name = "uname")
